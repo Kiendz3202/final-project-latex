@@ -1,0 +1,19 @@
+# LaTeX auxiliary files
+*.aux
+*.log
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.out
+*.lof
+*.lot
+*.bbl
+*.blg
+*.run.xml
+*.bcf
+*-blx.bib
+*.glsdefs
+
+# VS Code History
+.history/
