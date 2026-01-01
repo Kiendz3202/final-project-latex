@@ -1,0 +1,113 @@
+\ttl@change@i {\@ne }{chapter}{0.0cm}{\bfseries \vspace {0.3cm}}{{\bfseries {\scshape } CHƯƠNG \thecontentslabel .\ }}{}{\titlerule *[0.3pc]{.}\contentspage }\relax 
+\ttl@change@v {chapter}{}{}{}\relax 
+\ttl@change@i {\@ne }{section}{0.0cm}{\vspace {0.3cm}}{\thecontentslabel \ }{}{\titlerule *[0.3pc]{.}\contentspage }\relax 
+\ttl@change@v {section}{}{}{}\relax 
+\ttl@change@i {\@ne }{subsection}{1.0cm}{\vspace {0.3cm}}{\thecontentslabel \ }{}{\titlerule *[0.3pc]{.}\contentspage }\relax 
+\ttl@change@v {subsection}{}{}{}\relax 
+\thispagestyle {empty}
+\contentsline {chapter}{\numberline {1}GIỚI THIỆU ĐỀ TÀI}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Đặt vấn đề}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Mục tiêu và phạm vi đề tài}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Định hướng giải pháp}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Bố cục đồ án}{5}{section.1.4}%
+\contentsline {chapter}{\numberline {2}KHẢO SÁT VÀ PHÂN TÍCH YÊU CẦU}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Khảo sát hiện trạng}{7}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Khảo sát UI/UX và mô hình phí của các NFT marketplace}{7}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}So sánh và đánh giá hiện trạng}{9}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Kết luận khảo sát hiện trạng}{10}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Tổng quan chức năng}{11}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Biểu đồ usecase tổng quát}{11}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Biểu đồ usecase phân rã Kết nối ví}{12}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Biểu đồ usecase phân rã xem và tìm kiếm NFT, Collection}{13}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Biểu đồ usecase phân rã quản lý NFT và Collection}{14}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Biểu đồ usecase phân rã quản lý tài khoản cá nhân}{15}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Biểu đồ usecase phân rã giao dịch NFT}{16}{subsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.2.7}Biểu đồ usecase phân rã xem báo cáo và thống kê}{17}{subsection.2.2.7}%
+\contentsline {subsection}{\numberline {2.2.8}Biểu đồ usecase phân rã quản trị hệ thống}{18}{subsection.2.2.8}%
+\contentsline {subsection}{\numberline {2.2.9}Quy trình nghiệp vụ}{19}{subsection.2.2.9}%
+\contentsline {section}{\numberline {2.3}Đặc tả chức năng}{20}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Đặc tả usecase kết nối ví}{21}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Đặc tả usecase tạo NFT}{22}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Đặc tả usecase niêm yết NFT}{23}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Đặc tả usecase mua NFT}{24}{subsection.2.3.4}%
+\contentsline {section}{\numberline {2.4}Yêu cầu phi chức năng}{24}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Yêu cầu về hiệu năng}{24}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}Yêu cầu về bảo mật}{25}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Yêu cầu về khả dụng và trải nghiệm người dùng}{25}{subsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.4.4}Yêu cầu về bảo trì và mở rộng}{25}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}Ràng buộc kỹ thuật}{26}{subsection.2.4.5}%
+\contentsline {chapter}{\numberline {3}CÔNG NGHỆ SỬ DỤNG}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Kiến trúc hệ thống}{27}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Monolith theo mô hình client--server}{27}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Nguyên tắc phân tách on-chain và off-chain}{28}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Ngôn ngữ và nền tảng phát triển}{28}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}TypeScript trong phát triển ứng dụng web}{28}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Node.js và mô hình I/O bất đồng bộ}{29}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Công nghệ xây dựng giao diện người dùng}{29}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}React và Next.js}{29}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Tương tác ví và trải nghiệm Web3 trên giao diện}{30}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Công nghệ xây dựng backend và API}{30}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}NestJS và cách tổ chức backend theo module}{30}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}RESTful API và tài liệu hoá API}{31}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Cơ sở dữ liệu và quản lý dữ liệu off-chain}{32}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}PostgreSQL cho dữ liệu nghiệp vụ}{32}{subsection.3.5.1}%
+\contentsline {section}{\numberline {3.6}Cache và tối ưu hiệu năng}{33}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Redis}{33}{subsection.3.6.1}%
+\contentsline {section}{\numberline {3.7}Lưu trữ nội dung số}{33}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Amazon S3 và cơ chế presigned URL}{33}{subsection.3.7.1}%
+\contentsline {section}{\numberline {3.8}Blockchain và Smart Contract}{34}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Solidity, EVM và chuẩn NFT}{34}{subsection.3.8.1}%
+\contentsline {section}{\numberline {3.9}Xác thực và bảo mật}{35}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}SIWE (EIP-4361) cho đăng nhập bằng ví}{35}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}JWT (RFC 7519) để bảo vệ API}{36}{subsection.3.9.2}%
+\contentsline {section}{\numberline {3.10}Triển khai và vận hành(cái này cần update lại, hiện tại đang chưa làm)}{36}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Docker và định hướng triển khai trên AWS}{36}{subsection.3.10.1}%
+\contentsline {section}{\numberline {3.11}Kết luận chương}{37}{section.3.11}%
+\contentsline {chapter}{\numberline {4}THIẾT KẾ, TRIỂN KHAI VÀ ĐÁNH GIÁ HỆ THỐNG}{38}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Thiết kế kiến trúc}{38}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Lựa chọn kiến trúc phần mềm}{38}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Thiết kế tổng quan}{40}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Thiết kế chi tiết gói}{41}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Thiết kế chi tiết}{43}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Thiết kế giao diện}{43}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Thiết kế lớp}{45}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Thiết kế cơ sở dữ liệu}{46}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Xây dựng ứng dụng}{49}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Thư viện và công cụ sử dụng}{49}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Kết quả đạt được(cần cập nhật lại bảng chỉ số thống kê)}{50}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Minh họa các chức năng chính}{51}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}Kiểm thử}{51}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Mục tiêu và phạm vi kiểm thử}{51}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Kỹ thuật kiểm thử đã sử dụng}{51}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Thiết kế các trường hợp kiểm thử}{51}{subsection.4.4.3}%
+\contentsline {subsubsection}{\numberline {a}Chức năng 1: Đăng nhập bằng ví (SIWE)}{51}{subsubsection.4.4.3.1}%
+\contentsline {subsubsection}{\numberline {b}Chức năng 2: Tạo NFT}{52}{subsubsection.4.4.3.2}%
+\contentsline {subsubsection}{\numberline {c}Chức năng 3: Niêm yết bán và cập nhật trạng thái sau giao dịch}{52}{subsubsection.4.4.3.3}%
+\contentsline {section}{\numberline {4.5}Triển khai(khi nào deploy có cấu hình server thì cập nhật vào đây)}{53}{section.4.5}%
+\contentsline {chapter}{\numberline {5}CÁC GIẢI PHÁP VÀ ĐÓNG GÓP NỔI BẬT}{54}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Đồng bộ dữ liệu từ blockchain về cơ sở dữ liệu}{54}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Giới thiệu}{54}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Giải pháp}{54}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Kết quả đạt được}{55}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}Cơ chế xác minh giao dịch để tránh cập nhật sai hoặc bị giả mạo}{55}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Giới thiệu}{55}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Giải pháp}{55}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Kết quả đạt được}{56}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Thiết kế cập nhật dữ liệu sau giao dịch theo hướng idempotent và có trạng thái trung gian}{56}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Giới thiệu}{56}{subsection.5.3.1}%
+\contentsline {subsection}{\numberline {5.3.2}Giải pháp}{56}{subsection.5.3.2}%
+\contentsline {subsection}{\numberline {5.3.3}Kết quả đạt được}{56}{subsection.5.3.3}%
+\contentsline {section}{\numberline {5.4}Tối ưu các API đọc nhiều bằng cache và tổ chức truy vấn phục vụ UI}{56}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Giới thiệu}{56}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Giải pháp}{57}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Kết quả đạt được}{57}{subsection.5.4.3}%
+\contentsline {section}{\numberline {5.5}Chiến lược migration an toàn để giảm rủi ro gián đoạn}{57}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Giới thiệu}{57}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Giải pháp}{57}{subsection.5.5.2}%
+\contentsline {subsection}{\numberline {5.5.3}Kết quả đạt được}{57}{subsection.5.5.3}%
+\contentsline {section}{\numberline {5.6}Kết luận chương}{57}{section.5.6}%
+\contentsline {chapter}{\numberline {6}KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN}{59}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Kết luận}{59}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Hướng phát triển}{60}{section.6.2}%
+\contentsline {chapter}{TÀI LIỆU THAM KHẢO}{63}{section*.33}%
+\contentsfinish 

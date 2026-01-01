@@ -1,0 +1,391 @@
+\documentclass[../DoAn.tex]{subfiles}
+\begin{document}
+
+Chương này trình bày quá trình khảo sát hiện trạng các hệ thống NFT marketplace, phân tích nhu cầu của người dùng và xác định các yêu cầu đối với hệ thống cần xây dựng. Trên cơ sở đó, em đề xuất tập các chức năng chính, mô hình hoá dưới dạng biểu đồ use case, đặc tả chi tiết một số use case quan trọng và đưa ra các yêu cầu phi chức năng. Những nội dung này là cơ sở để thiết kế kiến trúc, cơ sở dữ liệu, giao diện và các module trong các chương tiếp theo.
+
+% \section{Khảo sát hiện trạng}
+% \label{section:2.1}
+
+% \subsection{Khảo sát UI/UX và mô hình phí của các NFT marketplace}
+
+% Các hệ thống NFT marketplace phổ biến hiện nay (như OpenSea, Blur, Magic Eden, \ldots) đều cung cấp tương đối đầy đủ các chức năng chính từ tạo NFT, quản lý bộ sưu tập, niêm yết, mua/bán cho đến thống kê giao dịch. Tuy nhiên, khi quan sát ở góc độ người dùng mới và so sánh trải nghiệm thực tế, có thể nhận thấy rằng bức tranh UI/UX của các nền tảng này khá phức tạp và đôi khi gây khó khăn cho người ít kinh nghiệm về Web3.
+
+% Trước hết, giao diện của nhiều nền tảng được thiết kế theo hướng dồn rất nhiều thông tin và thao tác lên cùng một màn hình. Trang chi tiết NFT thường hiển thị đồng thời các trường kỹ thuật như địa chỉ smart contract, token ID dạng số lớn, chuẩn token (ERC-721, ERC-1155), network, trạng thái contract đã được xác minh hay chưa, cùng với lịch sử giao dịch chi tiết. Khi thực hiện giao dịch mua/bán, người dùng thường phải trải qua nhiều bước xác nhận: phê duyệt (approve) token, ký nhiều giao dịch liên tiếp, lựa chọn gas price/gas limit, \ldots Các thao tác này tuy quen thuộc với người dùng Web3 lâu năm, nhưng đối với người mới, việc phải xử lý nhiều khái niệm kỹ thuật liên tiếp dễ tạo cảm giác rối rắm và thiếu tự tin khi thao tác.
+
+% Bên cạnh đó, nhiều thông tin kỹ thuật khó hiểu xuất hiện ngay ở lớp giao diện đầu tiên. Địa chỉ ví và địa chỉ contract thường được hiển thị dưới dạng chuỗi hex dài; thông tin block, transaction hash, timestamp on-chain được trình bày chi tiết; các tham số gas (gas price, gas limit) và network fee được diễn đạt bằng nhiều đơn vị (Gwei, ETH, USD); các flag kỹ thuật như ``contract not verified'', ``token standard'', ``on-chain metadata'', \ldots cũng xuất hiện dày đặc. Về mặt chuyên môn, đây là những thông tin quan trọng, nhưng việc đưa chúng lên quá sớm và quá nhiều khiến người dùng phổ thông khó hình dung đâu là thông tin cần tập trung để ra quyết định (mua/bán, niêm yết) và đâu là thông tin chỉ mang tính tham khảo kỹ thuật.
+
+% Ở khía cạnh quản lý tài sản, cách tổ chức giao diện để quản lý collection và NFT trên nhiều nền tảng cũng chưa thật sự thân thiện. Các thao tác xem, lọc, quản lý nhiều collection và nhiều NFT của một creator thường trải qua nhiều màn hình và nhiều tab, sử dụng nhiều bộ lọc và phân trang. Người sáng tạo nếu muốn nắm được hiệu quả của từng collection (doanh thu, số lượng đã bán, giá trung bình, \ldots) thường phải tự tổng hợp từ nhiều nơi, thay vì có một dashboard tập trung, đơn giản, hiển thị các chỉ số chính một cách trực quan.
+
+% Một vấn đề khác là mô hình phí nền tảng. Nhiều marketplace thu phí nền tảng trên mỗi giao dịch ở mức đáng kể (ví dụ khoảng 2--2.5\% giá trị giao dịch), ngoài phần phí gas mà người dùng phải trả cho mạng blockchain. Với những creator nhỏ hoặc người sưu tầm giao dịch các NFT có giá trị không quá lớn, tổng chi phí phải trả (gas + platform fee) trở thành rào cản không nhỏ, khiến họ ngại thử nghiệm hoặc giao dịch với tần suất cao.
+
+% Trong bối cảnh đó, đề tài của em hướng đến một cách tiếp cận khác: giao diện đơn giản hơn, tập trung vào các bước nghiệp vụ chính nhưng vẫn cung cấp đầy đủ thông tin cần thiết cho quyết định của người dùng. Cụ thể, hệ thống tập trung vào các luồng cơ bản như kết nối ví, tạo NFT, tạo collection, niêm yết, mua, xem chi tiết và xem dashboard; các thông tin kỹ thuật phức tạp (địa chỉ contract, token ID, gas limit, nonce, \ldots) sẽ không được đưa vào dày đặc trong giao diện chính, mà được ẩn dưới dạng phần ``chi tiết nâng cao'' nếu người dùng có nhu cầu xem. Thay vào đó, các thông tin quan trọng cho quyết định giao dịch như giá hiện tại, lịch sử giá (price history), số lần giao dịch, chủ sở hữu hiện tại, mô tả và các thuộc tính chính của NFT, cùng với các chỉ số tổng quan trên dashboard (tổng doanh thu, số NFT đã bán, tổng số giao dịch, xu hướng tăng/giảm theo mốc thời gian) sẽ được ưu tiên hiển thị rõ ràng.
+
+% Về mô hình phí, trong phạm vi đồ án, hệ thống được thiết kế với định hướng phí nền tảng thấp hơn mặt bằng chung (ví dụ khoảng 1\% mỗi giao dịch), nhằm khuyến khích người dùng thử nghiệm và giao dịch thường xuyên. Kiến trúc smart contract và backend được xây dựng theo hướng cho phép điều chỉnh mức phí này thông qua cấu hình, tạo sự linh hoạt nếu triển khai trong môi trường thực tế. Tóm lại, trọng tâm của hệ thống là đơn giản hoá UI/UX, trì hoãn hoặc ẩn bớt những thông tin kỹ thuật khó hiểu ở bước đầu, nhưng vẫn đảm bảo cung cấp đầy đủ dữ liệu quan trọng để người dùng, kể cả không chuyên, có thể nhanh chóng làm quen và ra quyết định trên marketplace.
+
+% \subsection{So sánh và đánh giá hiện trạng}
+% \label{subsec:survey-compare}
+
+% Dựa trên việc khảo sát một số nền tảng tiêu biểu, em tổng hợp một bảng so sánh khái quát một số đặc điểm quan trọng liên quan đến đối tượng phục vụ, cách thiết kế giao diện, mức độ phức tạp UI/UX và mô hình phí nền tảng như sau:
+
+% \begin{table}[H]
+%   \centering
+%   \begin{tabular}{|p{3cm}|p{4cm}|p{4cm}|p{3cm}|}
+%     \hline
+%     \textbf{Tiêu chí} & \textbf{OpenSea} & \textbf{Blur} & \textbf{Magic Eden} \\
+%     \hline
+%     Đối tượng chính & Nhà sưu tầm, nghệ sĩ, dự án NFT đa dạng & Trader, nhà giao dịch chuyên nghiệp, tập trung vào volume & Cộng đồng sưu tầm NFT theo từng hệ sinh thái (Solana, đa chuỗi) \\
+%     \hline
+%     Giao diện & Nhiều thông tin, nhiều tab; kết hợp thông tin kỹ thuật và thông tin giao dịch trên cùng màn hình & UI tối ưu cho giao dịch nhanh, bảng lệnh dày đặc, nhiều filter nâng cao & Giao diện tương đối trực quan nhưng vẫn chứa nhiều thông tin kỹ thuật trên trang chi tiết \\
+%     \hline
+%     Mức độ phức tạp UI/UX & Cao đối với người mới: phải hiểu contract, network, gas, \ldots & Rất cao đối với người mới, nhiều khái niệm chuyên cho trader & Trung bình, thân thiện hơn nhưng vẫn yêu cầu hiểu một số khái niệm kỹ thuật \\
+%     \hline
+%     Thông tin kỹ thuật hiển thị & Địa chỉ contract, token ID, chuẩn token, network, transaction history chi tiết, \ldots & Nhiều thông tin về lệnh, order book, nguồn dữ liệu tổng hợp từ nhiều sàn & Contract, chain, thuộc tính chi tiết; liên kết đến explorer, \ldots \\
+%     \hline
+%     Dashboard cho người dùng & Có nhưng phân tán theo nhiều trang, nhiều tab & Tập trung vào chỉ số giao dịch (volume, PnL) & Có một số trang thống kê theo collection, chưa quá sâu cho từng người dùng \\
+%     \hline
+%     Phí nền tảng (platform fee) & Ở mức tương đối cao so với giao dịch nhỏ (thường khoảng vài phần trăm mỗi giao dịch, chưa tính gas) & Tối ưu cho trader, kết hợp nhiều nguồn, vẫn có phí nền tảng/aggregator & Tương tự, thu phí trên mỗi giao dịch, phụ thuộc từng collection và chính sách \\
+%     \hline
+%   \end{tabular}
+%   \caption{So sánh khái quát một số đặc điểm UI/UX và mô hình phí của các NFT marketplace}
+%   \label{tab:nft-marketplace-compare}
+% \end{table}
+
+% Từ bảng so sánh này có thể nhận thấy một số đặc điểm chung. Thứ nhất, các nền tảng lớn đều cố gắng phục vụ đồng thời nhiều nhóm người dùng (creator, collector, trader chuyên nghiệp), dẫn đến việc giao diện phải gánh nhiều chức năng và nhiều loại thông tin trên cùng hệ thống. Điều này giúp đáp ứng được nhu cầu đa dạng, nhưng cũng làm tăng độ phức tạp, đặc biệt với người dùng mới.
+
+% Thứ hai, thông tin kỹ thuật xuất hiện khá dày đặc trên các trang quan trọng như trang chi tiết NFT hay trang giao dịch. Đối với người dùng đã quen thuộc với Web3, đây là điểm cộng vì họ có thể kiểm tra nhiều thông tin một cách nhanh chóng. Ngược lại, với người dùng phổ thông, việc phải đối diện với các khái niệm như contract address, network, gas, explorer, \ldots ngay từ đầu lại trở thành rào cản tâm lý không nhỏ.
+
+% Thứ ba, mô hình phí nền tảng kết hợp với phí gas khiến tổng chi phí cho mỗi giao dịch không hề thấp, đặc biệt đối với các giao dịch có giá trị trung bình hoặc thấp. Mức phí nền tảng vài phần trăm giá trị giao dịch là có thể chấp nhận được với các dự án lớn hoặc nhà giao dịch chuyên nghiệp, nhưng đối với người dùng nhỏ lẻ, đây là yếu tố khiến họ cân nhắc kỹ trước khi tham gia.
+
+% \subsection{Kết luận khảo sát hiện trạng}
+
+% Từ các phân tích và so sánh ở trên, em rút ra một số định hướng chính cho hệ thống NFT marketplace trong phạm vi đồ án. Về mặt giao diện, hệ thống cần được thiết kế theo hướng đơn giản hoá, tối ưu cho người dùng không chuyên: các thông tin kỹ thuật khó hiểu như contract address chi tiết, gas limit, nonce, thông tin block, \ldots nên được ẩn khỏi luồng thao tác chính và chỉ xuất hiện khi người dùng chủ động xem phần ``chi tiết kỹ thuật''. Thay vào đó, các thông tin quan trọng cho quyết định giao dịch như giá hiện tại, lịch sử giá, số lượng giao dịch, mô tả và các thuộc tính cốt lõi của NFT cần được hiển thị rõ ràng, dễ đọc.
+
+% Bên cạnh đó, hệ thống nên tập trung vào một số luồng nghiệp vụ chính, được trình bày mạch lạc: kết nối ví, tạo NFT, tạo collection, niêm yết, mua NFT, xem dashboard cá nhân và dashboard collection. Mỗi luồng được chia thành các bước rõ ràng, có hướng dẫn cụ thể, hạn chế việc người dùng phải chuyển qua lại quá nhiều tab hay màn hình.
+
+% Một điểm quan trọng khác là việc cung cấp các dashboard đơn giản nhưng đủ dùng. Người sáng tạo cần có khả năng nhanh chóng xem được tổng doanh thu, số NFT đã bán, hiệu quả của từng collection mà không phải tự tổng hợp dữ liệu. Người sưu tầm cần thấy được lịch sử mua/bán, tổng giá trị tài sản và xu hướng giá của các NFT đang sở hữu để có cơ sở đưa ra quyết định.
+
+% Cuối cùng, về chi phí, hệ thống được định hướng với mức phí nền tảng thấp hơn mặt bằng chung, ví dụ khoảng 1\% mỗi giao dịch, nhằm giảm gánh nặng chi phí cho người dùng, đặc biệt là các creator nhỏ và người sưu tầm giao dịch với giá trị không quá lớn nhưng tần suất có thể cao. Kiến trúc smart contract và backend sẽ được xây dựng sao cho mức phí này có thể cấu hình linh hoạt, tạo điều kiện thuận lợi nếu hệ thống được mở rộng trong tương lai.
+
+% Những định hướng nêu trên sẽ là cơ sở để xác định tập chức năng và yêu cầu chi tiết của hệ thống trong các mục tiếp theo của chương này.
+
+
+% \section{Tổng quan chức năng}
+% \label{section:2.2}
+
+% Trong phần này, em trình bày tổng quan các chức năng chính của hệ thống dưới dạng biểu đồ use case tổng quát và các nhóm use case phân rã. Mục tiêu là cung cấp một cái nhìn toàn cảnh về những gì hệ thống cần hỗ trợ, trước khi đi vào đặc tả chi tiết từng use case cụ thể.
+
+% \subsection{Biểu đồ usecase tổng quát}
+% \label{subsection:2.2.1}
+
+% Hình \ref{fig:Fig1} mô tả tổng quan các chức năng tổng quan của hệ thống. Các tác nhân gồm có Khách(Guest), User và Admin
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Usecase_tong_quan.png}
+%     \caption{Biểu đồ usecase tổng quan}
+%     \label{fig:Fig1}
+% \end{figure}
+
+% \subsection{Biểu đồ usecase phân rã Kết nối ví}
+% \label{subsection:2.2.2}
+
+% Hình \ref{fig:Fig2} mô tả người dùng có thể kết nối đến ví Metamask
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Usecase_ket_noi_vi.png}
+%     \caption{Biểu đồ usecase phân rã Kết nối ví}
+%     \label{fig:Fig2}
+% \end{figure}
+
+% \subsection{Biểu đồ usecase phân rã xem và tìm kiếm NFT, Collection}
+% \label{subsection:2.2.3}
+
+% Hình \ref{fig:Fig3} mô tả người dùng có thể tìm kiếm và xem thông tin của NFT và Collection
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Xem_va_tim_kiem_nft.png}
+%     \caption{Biểu đồ usecase phân rã Xem và tìm kiếm NFT, Collection}
+%     \label{fig:Fig3}
+% \end{figure}
+
+% \subsection{Biểu đồ usecase phân rã quản lý NFT và Collection}
+% \label{subsection:2.2.4}
+
+% Hình \ref{fig:Fig4} mô tả người dùng có thể quản lý thông tin và thay đổi NFT và Collection
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Quan_ly_nft_collection.png}
+%     \caption{Biểu đồ usecase quản lý NFT và Collection}
+%     \label{fig:Fig4}
+% \end{figure}
+
+% \subsection{Biểu đồ usecase phân rã quản lý tài khoản cá nhân}
+% \label{subsection:2.2.5}
+
+% Hình \ref{fig:Fig5} mô tả người dùng có thể quản lý thông tin cá nhân của mình
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Quan_ly_tai_khoan.png}
+%     \caption{Biểu đồ usecase quản lý tài khoản cá nhân}
+%     \label{fig:Fig5}
+% \end{figure}
+
+% \subsection{Biểu đồ usecase phân rã giao dịch NFT}
+% \label{subsection:2.2.6}
+
+% Hình \ref{fig:Fig6} mô tả người dùng có thể thực hiện hành đông mua/bán NFT trên hệ thống
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Giao_dich_nft.png}
+%     \caption{Biểu đồ usecase giao dịch NFT}
+%     \label{fig:Fig6}
+% \end{figure}
+
+% \subsection{Biểu đồ usecase phân rã xem báo cáo và thống kê}
+% \label{subsection:2.2.7}
+
+% Hình \ref{fig:Fig7} mô tả người dùng có thể xem các thống kê về các hoạt động trên hệ thống
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Xem_bao_cao_va_thong_ke.png}
+%     \caption{Biểu đồ usecase xem báo cáo và thống kê}
+%     \label{fig:Fig7}
+% \end{figure}
+
+% \subsection{Biểu đồ usecase phân rã quản trị hệ thống}
+% \label{subsection:2.2.8}
+
+% Hình \ref{fig:Fig8} mô tả Admin có thể chỉnh sửa thông tin trên hệ thống
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=\textwidth]{Hinhve/Quan_tri_he_thong.png}
+%     \caption{Biểu đồ usecase quản trị hệ thống}
+%     \label{fig:Fig8}
+% \end{figure}
+
+% \subsection{Quy trình nghiệp vụ}
+% \label{subsection:2.2.9}
+
+% Bên cạnh các use case riêng lẻ, hệ thống còn có các quy trình nghiệp vụ kết hợp nhiều use case để thực hiện một nhiệm vụ hoàn chỉnh. Một số quy trình tiêu biểu:
+
+% \begin{itemize}
+%   \item \textbf{Quy trình 1: Tạo và niêm yết NFT mới}
+%   \begin{enumerate}
+%     \item Người dùng kết nối ví.
+%     \item Người dùng upload hình ảnh NFT thông qua presigned URL.
+%     \item Hệ thống lưu metadata off-chain và gọi smart contract để mint NFT.
+%     \item Sau khi mint thành công, người dùng cấu hình giá và niêm yết NFT.
+%     \item Hệ thống cập nhật trạng thái NFT sang ``Đang niêm yết'' và hiển thị trên marketplace.
+%   \end{enumerate}
+
+%   \item \textbf{Quy trình 2: Mua NFT}
+%   \begin{enumerate}
+%     \item Người dùng (người mua) kết nối ví và chọn một NFT đang được niêm yết.
+%     \item Hệ thống hiển thị chi tiết NFT, giá bán, phí nền tảng (nếu có), tổng số tiền cần thanh toán.
+%     \item Người dùng xác nhận mua, hệ thống gọi smart contract thực hiện giao dịch.
+%     \item Sau khi giao dịch được xác nhận, chủ sở hữu mới được cập nhật on-chain.
+%     \item Backend đồng bộ dữ liệu, ghi lại bản ghi lịch sử giao dịch và cập nhật dashboard của người mua và người bán.
+%   \end{enumerate}
+% \end{itemize}
+
+% Các quy trình này sẽ được mô tả bằng biểu đồ hoạt động (activity diagram) để minh hoạ luồng tương tác giữa người dùng, backend và smart contract.
+
+% \section{Đặc tả chức năng}
+% \label{section:2.3}
+
+% Trong phần này, em lựa chọn một số use case quan trọng để đặc tả chi tiết, bao gồm: Kết nối ví, Tạo NFT, Niêm yết NFT, Mua NFT.
+
+% \subsection{Đặc tả usecase kết nối ví}
+
+% \begin{table}[H]
+% \centering
+% \renewcommand{\arraystretch}{1.25}
+% \setlength{\tabcolsep}{8pt}
+% \begin{tabular}{|p{4cm}|p{11.5cm}|}
+% \hline
+% \textbf{Mã Usecase} & Kết nối ví \\ \hline
+% \textbf{Mô tả} & Cho phép người dùng kết nối ví MetaMask để đăng nhập vào hệ thống. \\ \hline
+% \textbf{Tác nhân} & Khách (Guest) \\ \hline
+% \textbf{Sự kiện kích hoạt} & Người dùng bấm nút ``Connect wallet'' trên trang web. \\ \hline
+% \textbf{Tiền điều kiện} &
+% 1. Trình duyệt có ví tương thích (MetaMask). \newline
+% 2. Người dùng chưa đăng nhập.
+% \\ \hline
+% \textbf{Hậu điều kiện} &
+% Hệ thống lấy được public address, tạo hồ sơ người dùng, frontend nhận token và hiển thị trạng thái đã đăng nhập.
+% \\ \hline
+% \textbf{Luồng chính} &
+% 1. Người dùng bấm nút ``Connect wallet''. \newline
+% 2. Frontend yêu cầu ví kết nối, nhận address. \newline
+% 3. Frontend gọi backend tạo nonce cho address. \newline
+% 4. Backend tạo nonce và trả message cần ký. \newline
+% 5. Người dùng ký message trên ví, frontend nhận signature. \newline
+% 6. Frontend gửi address, signature, nonce lên backend. \newline
+% 7. Backend xác thực chữ ký, kiểm tra hoặc tạo thông tin người dùng và trả lại token. \newline
+% 8. Frontend lưu token và cập nhật giao diện thành đã đăng nhập.
+% \\ \hline
+% \textbf{Luồng thay thế} &
+% A1: Người dùng đã tồn tại, backend chỉ xác nhận và cấp token mới, không tạo thông tin người dùng. \newline
+% A2: Ví MetaMask đang sai network, frontend yêu cầu chuyển network trước khi giao dịch.
+% \\ \hline
+% \textbf{Luồng ngoại lệ} &
+% E1: Người dùng chưa cài đặt ví, hiển thị yêu cầu cài đặt ví. \newline
+% E2: Người dùng từ chối kết nối hoặc ký, giữ trạng thái khách và thông báo kết nối bị hủy. \newline
+% E3: Signature hoặc nonce hết hạn, báo lỗi và yêu cầu thực hiện lại.
+% \\ \hline
+% \end{tabular}
+% \caption{Đặc tả use case kết nối ví}
+% \label{tab:usecase-connect-wallet}
+% \end{table}
+
+
+% \subsection{Đặc tả usecase tạo NFT}
+
+% \begin{table}[H]
+% \centering
+% \renewcommand{\arraystretch}{1.25}
+% \setlength{\tabcolsep}{8pt}
+% \begin{tabular}{|p{4cm}|p{11.5cm}|}
+% \hline
+% \textbf{Mã Usecase} & Tạo NFT \\ \hline
+% \textbf{Mô tả} & Tạo NFT mới từ ảnh. \\ \hline
+% \textbf{Tác nhân} & Người dùng (User) \\ \hline
+% \textbf{Sự kiện kích hoạt} & Người dùng bấm nút tạo NFT trên trang web và xác nhận giao dịch trên ví. \\ \hline
+% \textbf{Tiền điều kiện} & Người dùng đã đăng nhập, có đủ số dư trả phí gas. \\ \hline
+% \textbf{Hậu điều kiện} &
+% NFT được tạo trên blockchain, database lưu trữ bản ghi về thông tin NFT.
+% \\ \hline
+% \textbf{Luồng chính} &
+% 1. Người dùng bấm nút tạo NFT và nhập thông tin NFT. \newline
+% 2. Người dùng chọn file ảnh. \newline
+% 3. Frontend gọi backend lấy presigned URL. \newline
+% 4. Frontend upload ảnh trực tiếp lên S3 bằng presigned URL. \newline
+% 5. Frontend gửi imageUrl và metadata lên backend để lưu metadata off-chain. \newline
+% 6. Backend trả metadataUri cho frontend. \newline
+% 7. Frontend gọi ví gửi transaction mint lên smart contract. \newline
+% 8. Transaction xác nhận thành công, cập nhật event mint hoặc đồng bộ theo txHash vào backend. \newline
+% 9. Backend tạo bản ghi NFT trong database.
+% \\ \hline
+% \textbf{Luồng thay thế} & Không có. \\ \hline
+% \textbf{Luồng ngoại lệ} &
+% E1: Tải ảnh lên S3 thất bại, thông báo lỗi và cho tải ảnh lại. \newline
+% E2: Người dùng từ chối ký transaction trên ví, dừng luồng lại. \newline
+% E3: Transaction bị lỗi, hiển thị lỗi và dừng luồng lại.
+% \\ \hline
+% \end{tabular}
+% \caption{Đặc tả usecase tạo NFT}
+% \label{tab:usecase-create-nft}t
+% \end{table}
+
+
+% \subsection{Đặc tả usecase niêm yết NFT}
+
+% \begin{table}[H]
+% \centering
+% \renewcommand{\arraystretch}{1.25}
+% \setlength{\tabcolsep}{8pt}
+% \begin{tabular}{|p{4cm}|p{11.5cm}|}
+% \hline
+% \textbf{Mã Usecase} & Niêm yết NFT \\ \hline
+% \textbf{Mô tả} & Chủ sở hữu đưa NFT lên marketplace với giá cố định để người khác mua. \\ \hline
+% \textbf{Tác nhân} & Người dùng (User) \\ \hline
+% \textbf{Sự kiện kích hoạt} & Người dùng bấm nút niêm yết NFT trên trang web và xác nhận giao dịch trên ví. \\ \hline
+% \textbf{Tiền điều kiện} &
+% Người dùng đã đăng nhập, có đủ số dư trả phí gas, NFT chưa được niêm yết và người dùng là chủ sở hữu của NFT.
+% \\ \hline
+% \textbf{Hậu điều kiện} &
+% NFT được niêm yết trên blockchain và NFT hiển thị trạng thái đã niêm yết trên trang web.
+% \\ \hline
+% \textbf{Luồng chính} &
+% 1. Người dùng ấn vào NFT. \newline
+% 2. Người dùng ấn nút niêm yết NFT. \newline
+% 3. Người dùng xác nhận niêm yết, ký và gửi transaction. \newline
+% 4. Transaction xác nhận thành công. \newline
+% 5. Backend cập nhật database cho NFT và hiển thị lên marketplace.
+% \\ \hline
+% \textbf{Luồng thay thế} &
+% Người dùng nhập giá mới trước khi ấn niêm yết.
+% \\ \hline
+% \textbf{Luồng ngoại lệ} &
+% E1: Giá không hợp lệ, chặn niêm yết và hiển thị lỗi. \newline
+% E2: Người dùng từ chối ký transaction trên ví, dừng luồng lại. \newline
+% E3: Transaction bị lỗi, hiển thị lỗi và dừng luồng lại.
+% \\ \hline
+% \end{tabular}
+% \caption{Đặc tả usecase niêm yết NFT}
+% \label{tab:usecase-list-nft}
+% \end{table}
+
+
+% \subsection{Đặc tả usecase mua NFT}
+
+% \begin{table}[H]
+% \centering
+% \renewcommand{\arraystretch}{1.25}
+% \setlength{\tabcolsep}{8pt}
+% \begin{tabular}{|p{4cm}|p{11.5cm}|}
+% \hline
+% \textbf{Mã Usecase} & Mua NFT \\ \hline
+% \textbf{Mô tả} &
+% Người mua thanh toán để mua NFT; smart contract chuyển quyền sở hữu; hệ thống ghi lịch sử giao dịch và lịch sử giá.
+% \\ \hline
+% \textbf{Tác nhân} & Người dùng (User) \\ \hline
+% \textbf{Sự kiện kích hoạt} & Người dùng bấm nút mua NFT trên trang web và xác nhận giao dịch trên ví. \\ \hline
+% \textbf{Tiền điều kiện} &
+% Người dùng đã đăng nhập, có đủ số dư trả phí gas và giá, NFT đã được niêm yết và người dùng không phải là chủ sở hữu của NFT.
+% \\ \hline
+% \textbf{Hậu điều kiện} &
+% Chủ sở hữu đổi từ người bán sang người mua; niêm yết kết thúc; database có transaction record; NFT chuyển về chưa niêm yết.
+% \\ \hline
+% \textbf{Luồng chính} &
+% 1. Người dùng bấm nút mua NFT. \newline
+% 2. UI hiển thị số tiền cần thanh toán. \newline
+% 3. Người dùng xác nhận, ví ký và gửi transaction mua. \newline
+% 4. Smart contract thực hiện thanh toán, trừ fee theo cấu hình và chuyển NFT cho người mua. \newline
+% 5. Transaction xác nhận thành công. \newline
+% 6. Backend cập nhật thông tin mới về NFT và transaction vào database. \newline
+% 7. Frontend thông báo mua thành công và hiển thị chủ sở hữu mới cho NFT.
+% \\ \hline
+% \textbf{Luồng thay thế} &
+% A1: Trong lúc người mua thao tác, NFT bị người khác mua trước, hiển thị thông báo mua lỗi.
+% \\ \hline
+% \textbf{Luồng ngoại lệ} &
+% E1: Người mua từ chối ký transaction trên ví, dừng luồng lại. \newline
+% E2: Transaction bị lỗi, hiển thị lỗi và dừng luồng lại.
+% \\ \hline
+% \end{tabular}
+% \caption{Đặc tả usecase mua NFT}
+% \label{tab:usecase-buy-nft}
+% \end{table}
+
+% \section{Yêu cầu phi chức năng}
+% \label{section:2.4}
+
+% Ngoài các yêu cầu chức năng đã được xác định thông qua quá trình khảo sát và phân tích, hệ thống NFT Marketplace cũng cần đáp ứng các yêu cầu phi chức năng nhằm đảm bảo chất lượng vận hành, mức độ an toàn và trải nghiệm sử dụng trong điều kiện thực tế. Nhóm yêu cầu này đóng vai trò như các tiêu chí ràng buộc về chất lượng, giúp hệ thống không chỉ đáp ứng đúng chức năng mà còn hoạt động ổn định, hiệu quả và thuận tiện cho việc bảo trì, mở rộng về sau.
+
+% \subsection{Yêu cầu về hiệu năng}
+% Hệ thống cần đảm bảo thời gian phản hồi hợp lý đối với các chức năng được sử dụng thường xuyên, đặc biệt là các API phục vụ hiển thị danh sách NFT, thông tin chi tiết NFT và thông tin collection. Trong phạm vi đồ án, thời gian phản hồi trung bình của các API này cần nằm trong một ngưỡng chấp nhận được là dưới 1s, đồng thời không tính thời gian chờ xác nhận giao dịch on-chain do phụ thuộc vào tốc độ xử lý của mạng blockchain. Để tối ưu hiệu năng, hệ thống áp dụng cơ chế cache bằng Redis cho các dữ liệu có tần suất đọc cao nhưng ít thay đổi như danh sách NFT phổ biến, thông tin collection và một số thống kê tổng quan. Bên cạnh đó, hệ thống cần có khả năng phục vụ đồng thời nhiều người dùng truy cập mà không xảy ra suy giảm hiệu năng đáng kể trong phạm vi triển khai và kiểm thử của đồ án.
+
+% \subsection{Yêu cầu về bảo mật}
+% Do đặc thù của NFT marketplace liên quan đến tài sản số và giao dịch, hệ thống phải đảm bảo cơ chế xác thực và kiểm soát truy cập chặt chẽ. Người dùng được xác thực dựa trên ví điện tử thông qua chữ ký (signature), kết hợp với cơ chế token (JWT) ở phía backend nhằm bảo vệ các API và duy trì phiên làm việc. Đồng thời, hệ thống phân quyền rõ ràng giữa người dùng thường và admin; người dùng chỉ được phép truy cập và thao tác trên dữ liệu thuộc về mình (ví dụ: NFT đang sở hữu, thông tin hồ sơ cá nhân, lịch sử giao dịch của bản thân). Ngoài ra, các thông tin nhạy cảm như access token, presigned URL, cấu hình hệ thống, khóa bí mật và thông tin kết nối dịch vụ cần được quản lý thông qua biến môi trường và cấu hình an toàn để hạn chế rủi ro rò rỉ. Ở lớp blockchain, smart contract cũng cần được thiết kế theo các nguyên tắc an toàn cơ bản nhằm hạn chế các lỗ hổng phổ biến như reentrancy, cũng như các sai sót liên quan đến tràn số (overflow/underflow) hoặc kiểm tra điều kiện không đầy đủ.
+
+% \subsection{Yêu cầu về khả dụng và trải nghiệm người dùng}
+% Hệ thống cần hướng tới giao diện đơn giản, nhất quán và dễ sử dụng, đồng thời hỗ trợ responsive trên nhiều độ phân giải màn hình như desktop, tablet và mobile. Các thao tác quan trọng như kết nối ví, mint NFT, list NFT lên marketplace và thực hiện mua (buy) cần có bước xác nhận rõ ràng, kèm theo trạng thái xử lý và kết quả hiển thị minh bạch để người dùng theo dõi tiến trình thao tác. Khi xảy ra sự cố, hệ thống phải cung cấp thông báo lỗi rõ ràng, dễ hiểu, giúp người dùng nhận biết các nguyên nhân phổ biến như giao dịch thất bại, không kết nối được ví, lỗi mạng hoặc dữ liệu đầu vào không hợp lệ. Những yếu tố này góp phần nâng cao mức độ tin cậy và giảm khó khăn cho người dùng, đặc biệt đối với các thao tác gắn với giao dịch on-chain.
+
+% \subsection{Yêu cầu về bảo trì và mở rộng}
+% Do hệ thống NFT Marketplace có khả năng phát triển thêm nhiều tính năng theo thời gian, kiến trúc hệ thống cần được thiết kế theo hướng module hoá để thuận tiện mở rộng và thay đổi. Backend cần tổ chức mã nguồn theo chuẩn, tách bạch các lớp như controller, service, repository nhằm tăng khả năng bảo trì và hỗ trợ kiểm thử. Đồng thời, hệ thống cần có tài liệu mô tả API và các ghi chú cần thiết để thuận lợi cho việc tiếp cận và phát triển tiếp theo. Ngoài ra, một số tham số quan trọng như phí giao dịch (fee), địa chỉ contract, endpoint node blockchain cần được cấu hình linh hoạt thông qua file cấu hình hoặc biến môi trường, hạn chế việc phải chỉnh sửa mã nguồn khi thay đổi môi trường triển khai.
+
+% \subsection{Ràng buộc kỹ thuật}
+% Trong phạm vi đồ án, hệ thống được định hướng triển khai với frontend sử dụng Next.js và backend sử dụng NestJS. Cơ sở dữ liệu chính dùng PostgreSQL để lưu trữ dữ liệu nghiệp vụ, Redis được sử dụng cho cơ chế cache nhằm tối ưu tốc độ truy vấn, và AWS S3 đảm nhiệm lưu trữ file (hình ảnh NFT). Smart contract được triển khai trên Binance Smart Chain Testnet. Bên cạnh đó, các công cụ và thư viện được lựa chọn cần có tính phổ biến, tài liệu rõ ràng và cộng đồng hỗ trợ tốt nhằm đảm bảo quá trình phát triển thuận lợi, đồng thời giảm rủi ro khi bảo trì hoặc mở rộng về sau.
+
+% \vspace{0.5cm}
+% Tóm lại, nhóm yêu cầu phi chức năng nêu trên là cơ sở để đánh giá chất lượng hệ thống NFT Marketplace, đồng thời định hướng cho các quyết định lựa chọn công nghệ và thiết kế kiến trúc hệ thống trong các chương tới.
+
+\end{document}

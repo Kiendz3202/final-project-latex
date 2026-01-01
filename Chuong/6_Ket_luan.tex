@@ -1,0 +1,22 @@
+\documentclass[../DoAn.tex]{subfiles}
+\begin{document}
+\section{Kết luận}
+Sau quá trình thực hiện, đồ án đã xây dựng được một hệ thống NFT Marketplace với quy trình tổng thể tương đối hoàn chỉnh, giúp người dùng có thể tiếp cận và sử dụng các chức năng cốt lõi của nền tảng một cách thuận tiện.
+
+Trong quá trình phát triển, em không chỉ tập trung vào việc hoàn thiện giao diện hay triển khai từng chức năng riêng lẻ, mà chú trọng tổ chức hệ thống theo hướng có cấu trúc rõ ràng và có khả năng mở rộng. Em đã thiết kế kiến trúc tổng quan, phân tách các module theo từng nhóm nghiệp vụ, xây dựng các API phục vụ các luồng xử lý chính, đồng thời chuẩn hoá cơ chế tiếp nhận và xử lý dữ liệu phát sinh từ giao dịch blockchain. Nhờ cách tổ chức này, hệ thống có nền tảng tốt để mở rộng thêm chức năng và cải thiện hiệu năng trong tương lai. Bên cạnh đó, em đặc biệt quan tâm đến tính đúng đắn của dữ liệu: hệ thống chỉ ghi nhận và cập nhật trạng thái nghiệp vụ khi giao dịch on-chain được xác nhận thành công. Điều này giúp dữ liệu hiển thị có cơ sở rõ ràng, hạn chế tình trạng sai lệch trạng thái khi người dùng thao tác qua ví hoặc khi giao dịch không thành công.
+
+Ngoài phần nghiệp vụ, đồ án cũng thể hiện định hướng triển khai theo hướng thực tiễn trong việc tổ chức dữ liệu và trải nghiệm sử dụng. Người dùng có thể quản lý tài sản của mình, theo dõi trạng thái, xem thông tin chi tiết và lịch sử liên quan một cách trực quan. Dữ liệu được lưu trữ theo hướng tách bạch giữa on-chain và off-chain, từ đó hỗ trợ linh hoạt cho việc hiển thị, truy vấn và mở rộng thống kê theo nhu cầu. Nhìn chung, đồ án đã tạo ra một sản phẩm có thể vận hành ổn định theo luồng nghiệp vụ cơ bản của marketplace, thể hiện được tư duy thiết kế hệ thống và khả năng triển khai end-to-end.
+
+Khi so sánh với các nền tảng marketplace phổ biến như OpenSea, hệ thống trong đồ án có cùng định hướng về bản chất nghiệp vụ nhưng phạm vi triển khai nhỏ hơn và phù hợp với mục tiêu học thuật. Các sản phẩm thương mại thường hỗ trợ đa chuỗi, đa hình thức giao dịch và sở hữu hạ tầng vận hành mạnh, kèm theo các cơ chế giám sát, tối ưu và chuẩn hoá vận hành ở quy mô lớn. Trong khi đó, đồ án của em tập trung làm rõ kiến trúc, đảm bảo luồng xử lý xuyên suốt và xây dựng một phiên bản marketplace có thể vận hành ổn định trong phạm vi triển khai của đồ án. Qua đó, kết quả đạt được vừa đáp ứng yêu cầu học thuật, vừa tạo nền tảng để tiếp tục mở rộng theo hướng sản phẩm thực tế.
+
+\section{Hướng phát triển}
+Trong thời gian tới, để hệ thống có thể tiến gần hơn tới một sản phẩm triển khai thực tế, phần hạ tầng vận hành cần được đầu tư bài bản hơn. Hệ thống nên hướng tới khả năng hoạt động ổn định khi tải tăng cao, hạn chế gián đoạn dịch vụ và có cơ chế phục hồi khi xảy ra sự cố. Đồng thời, việc bổ sung các thành phần quan sát như log tập trung, theo dõi chỉ số vận hành, cảnh báo lỗi và truy vết luồng xử lý sẽ giúp việc vận hành, kiểm tra và tối ưu hiệu năng trở nên chủ động và hiệu quả hơn.
+
+Về mặt mở rộng, hệ thống có thể phát triển theo hướng hỗ trợ đa chuỗi (multi-chain) để người dùng có thể giao dịch trên nhiều mạng blockchain khác nhau. Khi mở rộng theo hướng này, cần chuẩn hoá cách cấu hình theo từng chain và thống nhất cách xử lý giao dịch, nhằm đảm bảo trải nghiệm sử dụng không bị phân mảnh giữa các môi trường.
+
+Một hướng phát triển có tính ứng dụng cao là tích hợp các cổng thanh toán fiat on-ramp, giúp người dùng nạp tiền bằng phương thức thanh toán truyền thống thay vì phải chuẩn bị sẵn crypto. Điều này giúp giảm rào cản tiếp cận, từ đó mở rộng nhóm người dùng và tăng khả năng triển khai thực tế của sản phẩm.
+
+Bên cạnh đó, marketplace có thể được nâng cấp thêm các cơ chế giao dịch nâng cao, đặc biệt là các hình thức đấu giá. Những cơ chế này sẽ làm tăng tính linh hoạt của nền tảng và giúp hệ thống tiệm cận hơn với các sàn giao dịch lớn.
+
+Ngoài ra, nếu định hướng dài hạn là xây dựng một hệ sinh thái sâu hơn thay vì chỉ dừng ở mua bán NFT, hệ thống có thể mở rộng sang các tính năng DeFi như staking hoặc lending. Khi đó, NFT không chỉ là tài sản để giao dịch mà còn có thể tham gia vào các mô hình tạo lợi nhuận hoặc vay/mượn, qua đó tăng thêm giá trị sử dụng cho người dùng.
+\end{document}
