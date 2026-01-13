@@ -5,6 +5,7 @@
 \setlength{\LTleft}{0pt}
 \setlength{\LTright}{0pt}
 \usepackage{placeins}
+\usepackage{tabularx}
 
 \begin{document}
 
@@ -19,7 +20,7 @@ Trong phạm vi đồ án này, em lựa chọn kiến trúc Modular Monolith. �
     \centering
     \includegraphics[width=\textwidth]{Hinhve/modular_monolith.png}
     \caption{Ví dụ kiến trúc Modular monolith}
-    \label{fig:Fig1}
+    \label{fig:modular_monolith}
 \end{figure}
 
 Dựa trên kiến trúc đã lựa chọn, hệ thống NFT Marketplace được thiết kế theo mô hình client--server kết hợp blockchain được biểu thị bằng hình vẽ dưới đây.
@@ -28,7 +29,7 @@ Dựa trên kiến trúc đã lựa chọn, hệ thống NFT Marketplace đượ
     \centering
     \includegraphics[width=\textwidth]{Hinhve/kien_truc_he_thong.drawio.png}
     \caption{Kiến trúc của hệ thống NFT marketplace}
-    \label{fig:Fig2}
+    \label{fig:system_architecture}
 \end{figure}
 
 Ở phía client, người dùng thao tác trên giao diện web (Next.js/React) và tương tác với ví (Wallet Extension) để ký và gửi giao dịch blockchain. Các nghiệp vụ quan trọng như tạo, mua/bán NFT được thực hiện on-chain thông qua smart contract triển khai trên blockchain. Smart contract là thành phần nằm trên mạng blockchain, có nhiệm vụ thực thi logic giao dịch và phát sinh các sự kiện (events/logs) làm căn cứ xác minh giao dịch.
@@ -45,7 +46,7 @@ Với thiết kế theo hướng tách thành các module, mỗi module sẽ là
     \centering
     \includegraphics[width=\textwidth]{Hinhve/bieu_do_goi_tong_quan.drawio.png}
     \caption{Biểu đồ tổng quan gói}
-    \label{fig:Fig3}
+    \label{fig:package_diagram_overview}
 \end{figure}
 Dưới đây là mô tả sơ lược về từng package:
 
@@ -68,7 +69,7 @@ Các package được tổ chức theo hướng module nên kiến trúc mỗi g
     \centering
     \includegraphics[width=\textwidth]{Hinhve/bieu_do_goi_chi_tiet.drawio.png}
     \caption{Biểu đồ chi tiết gói}
-    \label{fig:Fig4}
+    \label{fig:package_diagram_detail}
 \end{figure}
 
 Controller: Đảm nhận vai trò tiếp nhận và xử lý các yêu cầu từ phía client thông qua các API. Nhiệm vụ chính của gói này là định tuyến yêu cầu đến đúng chức năng, kiểm tra/chuẩn hoá dữ liệu đầu vào và trả về phản hồi theo định dạng thống nhất. Controller không tập trung triển khai nghiệp vụ, mà đóng vai trò kết nối giữa client và hệ thống.
@@ -96,7 +97,7 @@ Hệ thống hướng đến các thiết bị phổ biến trên thị trườn
 \begin{table}[H]
 \centering
 \renewcommand{\arraystretch}{1.2}
-\begin{tabular}{|c|l|l|l|}
+\begin{tabular}{|c|p{3cm}|p{3cm}|p{5cm}|}
 \hline
 \textbf{STT} & \textbf{Loại thiết bị} & \textbf{Kích thước phổ biến} & \textbf{Độ phân giải mục tiêu} \\
 \hline
@@ -108,6 +109,7 @@ Hệ thống hướng đến các thiết bị phổ biến trên thị trườn
 \caption{Bảng mô tả thông tin về màn hình mà hệ thống hướng tới}
 \label{tab:ui-target-screens}
 \end{table}
+
 
 \textbf{Chuẩn hoá thiết kế giao diện}
 
@@ -163,12 +165,43 @@ Primary Button dùng cho hành động quan trọng như: \textit{Connect Wallet
 \textbf{(2) Secondary Button} dùng cho hành động phụ/hỗ trợ như: \textit{Cancel}.
 
 Các nút được thiết kế thống nhất về kiểu dáng và trạng thái hiển thị:
-(1) Trạng thái bình thường: hiển thị rõ nội dung, dễ nhận biết.
-(2) Trạng thái hover/active (desktop): thay đổi sắc độ/viền để phản hồi thao tác.
-(3) Trạng thái disabled: giảm độ nổi bật để biểu thị không thể thao tác.
-(4) Trạng thái loading: hiển thị tiến trình khi hệ thống đang xử lý các thao tác như xác nhận giao dịch hoặc tải dữ liệu.
+Trạng thái bình thường: hiển thị rõ nội dung, dễ nhận biết.
+Trạng thái hover/active (desktop): thay đổi sắc độ/viền để phản hồi thao tác.
+Trạng thái disabled: giảm độ nổi bật để biểu thị không thể thao tác.
+Trạng thái loading: hiển thị tiến trình khi hệ thống đang xử lý các thao tác như xác nhận giao dịch hoặc tải dữ liệu.
 
-\textbf{Minh họa thiết kế giao diện(đoạn này cần thêm ảnh vào, sau đọc lại nhớ bổ sung)}
+\textbf{Minh họa thiết kế giao diện}
+
+Dưới đây là một số thiết kế giao diện cho một vài chức năng chính của hệ thống.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/connect_wallet_ui.png}
+    \caption{Giao diện kết nối ví}
+    \label{fig:connect_wallet_ui}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/list_nft_ui.png}
+    \caption{Giao diện danh sách NFT}
+    \label{fig:list_nft_ui}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/nft_detail_ui.png}
+    \caption{Giao diện chi tiết NFT}
+    \label{fig:nft_detail_ui}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/create_nft_ui.png}
+    \caption{Giao diện tạo NFT}
+    \label{fig:create_nft_ui}
+\end{figure}
+
 
 \subsection{Thiết kế lớp}
 
@@ -176,7 +209,7 @@ Các nút được thiết kế thống nhất về kiểu dáng và trạng th�
     \centering
     \includegraphics[width=\textwidth]{Hinhve/bieu_do_lop_auth.drawio.png}
     \caption{Biểu đồ Lớp Auth service}
-    \label{fig:Fig5}
+    \label{fig:auth_service}
 \end{figure}
 
 Lớp AuthService được sử dụng để thực hiện xác thực người dùng dựa trên địa chỉ ví và chữ ký (signature). Khi người dùng gửi yêu cầu đăng nhập, hệ thống chuẩn hoá địa chỉ ví để đảm bảo tính nhất quán dữ liệu. Nếu request có kèm chữ ký và thông điệp ký, backend sẽ tiến hành xác minh chữ ký nhằm đảm bảo người dùng thực sự sở hữu ví đó. Sau khi xác thực hợp lệ, hệ thống tìm hoặc tự động tạo mới tài khoản theo địa chỉ ví, sau đó phát hành JWT để người dùng sử dụng trong các request tiếp theo. Lớp cũng hỗ trợ xác thực theo chuẩn SIWE và cung cấp các chức năng phụ trợ như tạo nonce và truy vấn hồ sơ người dùng.
@@ -185,14 +218,19 @@ Lớp AuthService được sử dụng để thực hiện xác thực người 
     \centering
     \includegraphics[width=\textwidth]{Hinhve/bieu_do_lop_nft.drawio.png}
     \caption{Biểu đồ Lớp NFT service}
-    \label{fig:Fig6}
+    \label{fig:nft_service}
 \end{figure}
 
 Lớp NFTService là lớp nghiệp vụ trung tâm của module NFT. Lớp này chịu trách nhiệm quản lý vòng đời của NFT trong hệ thống off-chain (tạo NFT, truy vấn, cập nhật, xoá), đồng thời xử lý các luồng nghiệp vụ gắn với blockchain như mint, list/unlist và purchase. Điểm quan trọng trong thiết kế là hệ thống không ghi nhận kết quả giao dịch chỉ dựa trên dữ liệu từ client, mà sử dụng txHash để truy vấn transaction và xác minh event phát sinh trên blockchain. Khi dữ liệu xác minh hợp lệ, backend mới cập nhật trạng thái NFT trong cơ sở dữ liệu và ghi nhận lịch sử giao dịch (event) để phục vụ các chức năng của history. Cách tiếp cận này giúp dữ liệu off-chain đồng bộ và có cơ sở tin cậy từ dữ liệu on-chain.
 
-\textbf{Biểu đồ trinh tự kết nối ví}
+\textbf{Biểu đồ trình tự kết nối ví}
 
-\textbf{Biểu đồ trinh mua NFT}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/bieu_do_tuan_tu_ket_noi_vi.png}
+    \caption{Biểu đồ trình tự kết nối ví}
+    \label{fig:connection_flow_sequence_diagram}
+\end{figure}
 
 \subsection{Thiết kế cơ sở dữ liệu}
 
@@ -202,7 +240,7 @@ Thiết kế sơ đồ thực thể liên kết:
     \centering
     \includegraphics[width=\textwidth]{Hinhve/database.png}
     \caption{Sơ đồ thực thể liên kết}
-    \label{fig:Fig7}
+    \label{fig:database}
 \end{figure}
 
 Đặc tả bảng User:
@@ -272,7 +310,7 @@ id & BIGINT & Khóa chính (PK) định danh NFT trong DB. \\ \hline
 name & VARCHAR(150) & Tên NFT. \\ \hline
 description & TEXT & Mô tả NFT. \\ \hline
 price & NUMERIC(38,0) & Giá hiện tại (có thể lưu theo wei hoặc theo đơn vị chuẩn tùy thiết kế). \\ \hline
-image\_url & TEXT & URL ảnh NFT (S3/IPFS/HTTP...). \\ \hline
+image\_url & TEXT & URL ảnh NFT. \\ \hline
 token\_id & BIGINT & TokenId on-chain của NFT. \\ \hline
 is\_for\_sale & BOOLEAN & Trạng thái đang được niêm yết bán hay không. \\ \hline
 contract\_address & VARCHAR(42) & Địa chỉ contract chứa NFT. \\ \hline
@@ -384,7 +422,61 @@ Dung lượng sản phẩm sau build (MB) & \textit{...} & \textit{...} & \texti
 \end{table}
 
 \subsection{Minh họa các chức năng chính}
-Sinh viên lựa chọn và đưa ra màn hình cho các chức năng chính, quan trọng, và thú vị nhất. Mỗi giao diện cần phải có lời giải thích ngắn gọn. Khi giải thích, sinh viên có thể kết hợp với các chú thích ở trong hình ảnh giao diện.
+
+\textbf{Giao diện Trang chủ (Home Page)}
+
+Trang chủ là nơi đầu tiên người dùng tiếp cận, cung cấp cái nhìn tổng quan về các NFT đang nổi bật, các bộ sưu tập mới nhất và các thông tin sự kiện.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/homepage_ui.png}
+    \caption{Giao diện Trang chủ}
+    \label{fig:homepage_ui}
+\end{figure}
+
+\textbf{Giao diện trang duyệt NFT}
+
+Đây là nơi người dùng có thể tìm kiếm và khám phá toàn bộ các NFT đang được rao bán. Hệ thống cung cấp các công cụ lọc mạnh mẽ giúp người dùng tìm được sản phẩm ưng ý một cách nhanh chóng.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/list_nft_page_ui.png}
+    \caption{Giao diện Trang duyệt NFT}
+    \label{fig:list_nft_page_ui}
+\end{figure}
+
+\textbf{Giao diện trang chi tiết NFT}
+
+Trang chi tiết NFT hiển thị toàn bộ thông tin về một NFT cụ thể. Đây là nơi người dùng mua hoặc đặt giá bán NFT. Thông tin bao gồm dữ liệu từ metadata (hình ảnh, thuộc tính) và dữ liệu từ blockchain (lịch sử giao dịch, chủ sở hữu).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/nft_detail_page_ui.png}
+    \caption{Giao diện Trang chi tiết NFT}
+    \label{fig:nft_detail_page_ui}
+\end{figure}
+
+\textbf{Giao diện trang tạo NFT}
+
+Cho phép người dùng trực tiếp tham gia vào việc tạo ra tài sản số. Người dùng tải lên tệp tin và nhập các thông tin mô tả, sau đó thực hiện giao dịch "Mint" để ghi dữ liệu lên blockchain.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/create_nft_page_ui.png}
+    \caption{Giao diện Trang tạo NFT}
+    \label{fig:create_nft_page_ui}
+\end{figure}
+
+\textbf{Giao diện trang Dashboard thống kê}
+
+Cho phép người dùng theo dõi được các chỉ số thống kê về lợi nhuận, số lượng NFT đã niêm yết, số lượng giao dịch đã diễn ra và các thông tin thống kê liên quan khác.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Hinhve/user_dashboard_page_ui.png}
+    \caption{Giao diện Trang Dashboard thống kê}
+    \label{fig:user_dashboard_page_ui}
+\end{figure}
 
 \section{Kiểm thử}
 
@@ -478,27 +570,27 @@ Người dùng nhập thông tin NFT (tên, mô tả, ảnh/metadata), backend l
 
 TC-NFT-01 & Tạo NFT hợp lệ &
 dữ liệu NFT hợp lệ &
-Gọi POST /nfts &
+Nhập thông tin, upload ảnh, ký transaction tạo NFT. &
 Tạo thành công, trả về dữ liệu đúng, DB có bản ghi mới. \\ \hline
 
 TC-NFT-02 & Thiếu trường bắt buộc &
 name rỗng hoặc thiếu &
-Gọi POST /nfts &
+Để trống tên NFT, bấm nút tạo. &
 Trả lỗi, không tạo bản ghi. \\ \hline
 
 TC-NFT-03 & Collection không tồn tại &
 collectionId sai &
-Gọi POST /nfts &
+Thao tác tạo với collection không hợp lệ. &
 Trả lỗi, không tạo NFT. \\ \hline
 
 TC-NFT-04 & Ảnh/URL sai định dạng &
 imageUrl không hợp lệ &
-Gọi POST /nfts &
+Upload file lỗi hoặc định dạng không hỗ trợ. &
 Trả lỗi, thông báo rõ trường sai. \\ \hline
 
 TC-NFT-05 & Giá trị biên (tên) &
 name quá dài hoặc vượt giới hạn &
-Gọi POST /nfts &
+Nhập tên NFT dài quá giới hạn cho phép. &
 Trả lỗi validation và yêu cầu user nhập lại. \\ \hline
 
 \caption{Thiết kế test case cho chức năng tạo NFT}
@@ -530,32 +622,32 @@ User niêm yết NFT với giá bán; sau giao dịch mua trên ví, frontend g�
 
 TC-LIST-01 & List NFT thành công &
 nft thuộc owner hiện tại, price $>$ 0 &
-Gọi POST /listings &
+Nhập giá bán, ký xác nhận niêm yết trên ví. &
 Chuyển trạng thái NFT listing sang active và cập nhật giá bán. \\ \hline
 
 TC-LIST-02 & Không phải chủ sở hữu &
 nft không thuộc user hiện tại &
-Gọi POST /listings &
+Thực hiện niêm yết NFT không thuộc sở hữu. &
 Trả lỗi và không tạo listing. \\ \hline
 
 TC-LIST-03 & Giá bán không hợp lệ (biên) &
 price = 0 hoặc price $<$ 0 &
-Gọi POST /listings &
+Nhập giá bán $\le$ 0 và bấm niêm yết. &
 Trả lỗi và không tạo listing. \\ \hline
 
 TC-BUY-01 & Xác nhận mua thành công &
 txHash hợp lệ, buyer/seller hợp lệ &
-Gọi POST /transactions/confirm &
+Bấm mua, ký transaction thanh toán và chờ xác nhận. &
 Cập nhật thành công owner sang buyer, tạo bản ghi history/event tương ứng. \\ \hline
 
 TC-BUY-02 & Trùng txHash (idempotent) &
 txHash đã tồn tại trong DB &
-Gọi lại confirm với cùng txHash &
+Xác nhận lại một giao dịch đã được xử lý trước đó. &
 Không tạo trùng; trả kết quả an toàn khi retry (idempotent). \\ \hline
 
 TC-CANCEL-01 & Hủy listing &
 listing đang active &
-Gọi POST /listings/cancel &
+Bấm hủy bán, ký xác nhận trên ví. &
 Chuyển trạng thái listing sang unactive thành công. \\ \hline
 
 \caption{Thiết kế test case cho chức năng niêm yết và cập nhật trạng thái sau giao dịch}

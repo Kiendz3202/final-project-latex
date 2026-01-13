@@ -51,15 +51,16 @@
 
 % ===================================================
 
-\renewcommand{\bibname}{Danh_sach_tai_lieu_tham_khao} 
-\usepackage[backend=bibtex,style=ieee]{biblatex}  %backend=biber is 'better'
+% \renewcommand{\bibname}{Danh_sach_tai_lieu_tham_khao} 
+% \usepackage[backend=bibtex,style=ieee]{biblatex}  %backend=biber is 'better'
 
 \renewcommand\appendixname{PHỤ LỤC}
 \renewcommand\appendixpagename{PHỤ LỤC}
 \renewcommand\appendixtocname{PHỤ LỤC}
 
 
-\addbibresource{Danh_sach_tai_lieu_tham_khao.bib} % chèn file chứa danh mục tài liệu tham khảo vào 
+
+% \addbibresource{Danh_sach_tai_lieu_tham_khao.bib} % chèn file chứa danh mục tài liệu tham khảo vào 
 
 \include{lstlisting} % Phần này cho phép chèn code và formatting code như C, C++, Python
 
@@ -280,7 +281,7 @@
 
 \newpage
 %\pagestyle{fancy} % Áp dụng header và footer
-\chapter{CÔNG NGHỆ SỬ DỤNG}
+\chapter{CƠ SỞ LÝ THUYẾT VÀ CÔNG NGHỆ SỬ DỤNG}
 \label{chapter:Methodology}
 \subfile{Chuong/3_Cong_nghe}
 
@@ -303,18 +304,23 @@
 
 \newpage
 %\pagestyle{fancy} % Áp dụng header và footer
-\chapter*{MỘT SỐ LƯU Ý VỀ TÀI LIỆU THAM KHẢO} %Kết luận và hướng phát triển}
+\chapter*{TÀI LIỆU THAM KHẢO} %Kết luận và hướng phát triển}
+\pagestyle{plain}
 \label{chapter:reference}
+
 \subfile{Chuong/7_Luu_y_tai_lieu_tham_khao}
 
 
-% ===================================================
-\newpage
-\renewcommand\bibname{TÀI LIỆU THAM KHẢO}
-\printbibliography
-\phantomsection\addcontentsline{toc}{chapter}{TÀI LIỆU THAM KHẢO}
+% % ===================================================
+% \newpage
+% \renewcommand\bibname{TÀI LIỆU THAM KHẢO}
+% \printbibliography
+% \phantomsection\addcontentsline{toc}{chapter}{TÀI LIỆU THAM KHẢO}
 
+\newpage
+\pagestyle{fancy}
 \appendixpage
+
 \appendices
 \addappheadtotoc
 

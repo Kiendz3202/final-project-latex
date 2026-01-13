@@ -3,106 +3,96 @@
 
 \section{Đặt vấn đề}
 
-Trong vài năm trở lại đây, khái niệm tài sản số và công nghệ chuỗi khối (blockchain) không còn xa lạ với cộng đồng công nghệ cũng như người dùng phổ thông. Cùng với đó, các tài sản số không thể thay thế (Non-Fungible Token -- NFT) xuất hiện như một cách mới để gắn danh tính và quyền sở hữu duy nhất cho từng đối tượng số, từ tranh vẽ, âm nhạc, vật phẩm trong game cho đến các bộ sưu tập sưu tầm. Thông qua NFT, người sáng tạo có thể phát hành tác phẩm của mình lên blockchain, còn nhà sưu tầm có thể mua, bán, trao đổi và theo dõi lịch sử sở hữu của từng tài sản.
+Trong vài năm trở lại đây, khái niệm tài sản số và công nghệ chuỗi khối (blockchain) ngày càng được quan tâm rộng rãi trong cộng đồng công nghệ, đồng thời dần tiếp cận đến nhóm người dùng phổ thông. Cùng với xu hướng đó, tài sản số không thể thay thế (Non-Fungible Token — NFT) xuất hiện như một phương thức để gắn định danh và quyền sở hữu duy nhất cho từng đối tượng số, từ tranh vẽ, âm nhạc, vật phẩm trong trò chơi cho đến các bộ sưu tập sưu tầm. NFT cho phép người sáng tạo phát hành tác phẩm lên blockchain, còn người sưu tầm có thể mua, bán, trao đổi và tra cứu lịch sử sở hữu của từng tài sản.
 
-Tuy nhiên, khi bắt đầu tiếp cận các sàn giao dịch NFT, đặc biệt là các nền tảng quốc tế, người dùng -- nhất là người mới làm quen với Web3 -- thường gặp nhiều rào cản:
+Tuy nhiên, do NFT và các ứng dụng Web3 vẫn là lĩnh vực tương đối mới, trải nghiệm sử dụng đối với người dùng, đặc biệt là người mới bắt đầu, còn gặp nhiều trở ngại. Những trở ngại này đến từ đặc thù của công nghệ blockchain như việc phải sử dụng ví điện tử, thực hiện ký giao dịch, hiểu về phí gas và các chuẩn token, cũng như cách kết hợp giữa dữ liệu lưu trữ trên chuỗi (on-chain) và dữ liệu lưu trữ ngoài chuỗi (off-chain). Bên cạnh đó, người dùng cũng có nhu cầu rõ ràng về việc quản lý tài sản tập trung, theo dõi biến động giá trị và xem các thống kê liên quan theo cách trực quan, nhất quán để hỗ trợ quá trình sử dụng và ra quyết định.
 
-l\begin{itemize}
-  \item Giao diện và trải nghiệm người dùng (UX/UI) tương đối phức tạp, đòi hỏi người dùng phải hiểu rõ về ví điện tử, phí gas, chuẩn NFT và các khái niệm mới trong blockchain trước khi có thể thao tác một cách tự tin.
-  \item Việc quản lý bộ sưu tập (collection) và từng NFT thường rời rạc, thiếu các công cụ trực quan để người sáng tạo theo dõi hiệu quả kinh doanh, mức độ quan tâm cũng như giá trị của tác phẩm theo thời gian.
-  \item Các số liệu phân tích như lịch sử giá, thống kê doanh thu, xu hướng giao dịch hay xếp hạng (ranking) đôi khi bị phân tán hoặc trình bày khó hiểu, khiến cả nhà sưu tầm lẫn người sáng tạo gặp khó khăn khi đưa ra quyết định.
-  \item Ở góc độ trải nghiệm, nhiều nền tảng hiện có còn tồn tại các rào cản như chi phí giao dịch cao, quy trình thao tác phức tạp, thiếu các tính năng hỗ trợ cộng đồng và tương tác, làm giảm động lực tham gia của người dùng mới.
-  \item Hệ thống lưu trữ metadata và hình ảnh NFT thường dựa trên các giải pháp phân tán như IPFS hoặc những dịch vụ đòi hỏi cấu hình phức tạp, không thân thiện về mặt phát triển và có thể gây ra vấn đề về hiệu năng, dẫn đến trải nghiệm chưa tốt cho người dùng.
+Từ góc độ bài toán ứng dụng, có thể tổng hợp một số nhu cầu chính như sau:
+
+\begin{itemize}
+\item Cần quy trình thao tác rõ ràng, dễ tiếp cận đối với các chức năng cốt lõi như tạo bộ sưu tập, tạo NFT, niêm yết và thực hiện giao dịch mua bán.
+\item Cần các màn hình quản lý giúp người sáng tạo theo dõi tình trạng và hiệu quả của bộ sưu tập, cũng như hoạt động của từng NFT theo thời gian.
+\item Cần cơ chế hiển thị và tổng hợp dữ liệu như lịch sử giá, thống kê giao dịch, xu hướng và xếp hạng theo cách dễ hiểu và nhất quán giữa các trang chức năng.
+\item Cần giải pháp lưu trữ metadata và hình ảnh NFT ổn định, dễ triển khai, đáp ứng nhu cầu truy cập nhanh trong môi trường ứng dụng web.
+\item Cần hỗ trợ tốt cho các thao tác liên quan đến Web3 như kết nối ví, xác thực chữ ký và đồng bộ trạng thái tài sản sau khi giao dịch được ghi nhận trên blockchain.
 \end{itemize}
 
-Từ những khó khăn nêu trên, trong khuôn khổ đồ án tốt nghiệp, em lựa chọn nghiên cứu và hiện thực một trang web NFT marketplace với giao diện gần gũi, tập trung hỗ trợ người dùng tạo, mua bán, quản lý và theo dõi giá trị NFT một cách trực quan. Hệ thống được thiết kế để vừa đáp ứng các yêu cầu kỹ thuật cốt lõi (tích hợp smart contract, xử lý giao dịch on-chain) vừa hướng đến trải nghiệm sử dụng đơn giản, rõ ràng cho cả người sáng tạo nội dung và nhà sưu tầm.
+Xuất phát từ các nhu cầu nêu trên, trong khuôn khổ đồ án tốt nghiệp, em lựa chọn nghiên cứu và xây dựng một website NFT marketplace tập trung vào các chức năng cốt lõi, đồng thời ưu tiên trải nghiệm sử dụng đơn giản và trực quan. Hệ thống hướng đến việc hỗ trợ người dùng tạo, mua bán, quản lý và theo dõi giá trị NFT theo thời gian, qua đó giúp giảm bớt rào cản khi tiếp cận Web3. Bên cạnh mục tiêu ứng dụng, đồ án cũng là cơ hội để em học hỏi và thực hành các nội dung quan trọng của lĩnh vực này, bao gồm tích hợp smart contract, xử lý giao dịch on-chain, tổ chức lưu trữ dữ liệu off-chain, cũng như thiết kế hệ thống theo hướng có khả năng mở rộng và dễ bảo trì.
 
 \section{Mục tiêu và phạm vi đề tài}
 
-Trên cơ sở tham khảo các hệ thống hiện có, các đồ án liên quan và nhu cầu thực tế, đồ án đặt ra các mục tiêu chính như sau:
-
+\subsection{Mục tiêu của đề tài}
+Trên cơ sở tham khảo các hệ thống hiện có và nhu cầu thực tế của người dùng khi tiếp cận NFT/Web3, đồ án hướng tới các mục tiêu chính sau:
 \begin{itemize}
-  \item \textbf{Xây dựng một website NFT marketplace hoàn chỉnh}: cho phép người dùng kết nối ví điện tử (wallet), thực hiện quá trình tạo (mint) NFT, đưa NFT lên sàn (list), mua/bán NFT và xem lại lịch sử giao dịch của mình. Các giao dịch mua bán được thực hiện thông qua smart contract nhằm đảm bảo tính an toàn và minh bạch.
-  
-  \item \textbf{Quản lý bộ sưu tập (collection)}: hỗ trợ người sáng tạo khởi tạo collection, thêm NFT vào các collection hiện có, quản lý thông tin mô tả và trạng thái niêm yết của từng NFT trong từng collection. Mỗi collection có thể được theo dõi độc lập về hoạt động và hiệu quả.
-  
-  \item \textbf{Cung cấp công cụ tra cứu và phân tích}: hiển thị trang chi tiết cho từng NFT và collection, bao gồm giá hiện tại, lịch sử giá (price history), số lượng giao dịch, thống kê doanh thu theo mốc thời gian. Hệ thống cung cấp một dashboard để người dùng có cái nhìn tổng quan về hoạt động mua bán và sáng tạo của mình.
-  
-  \item \textbf{Quản lý tài khoản và hồ sơ người dùng}: cung cấp trang hồ sơ cho phép người dùng theo dõi thông tin cá nhân, danh sách NFT đang sở hữu, NFT đã tạo, NFT đang rao bán và lịch sử giao dịch cá nhân. Hệ thống áp dụng cơ chế phân quyền và xác thực rõ ràng để bảo vệ dữ liệu người dùng và tránh truy cập trái phép.
-  
-  \item \textbf{Đảm bảo an toàn và minh bạch giao dịch}: mọi hoạt động mua, bán, chuyển nhượng NFT đều được quản lý bởi smart contract, hạn chế tối đa việc phụ thuộc vào xử lý off-chain cho các bước quan trọng của giao dịch. Smart contract được thiết kế có tính đến các lỗ hổng phổ biến như tấn công \textbf{Reentrancy} và sử dụng thư viện OpenZeppelin để tăng độ tin cậy.
-  
-  \item \textbf{Tối ưu hóa quy trình upload và lưu trữ}: sử dụng cơ chế presigned URL để người dùng có thể upload hình ảnh NFT trực tiếp lên dịch vụ lưu trữ đám mây (AWS S3), giảm tải cho server backend, rút ngắn thời gian xử lý và giúp hệ thống vận hành ổn định hơn.
-  
-  \item \textbf{Tối ưu hóa hiệu năng với caching}: tích hợp Redis như một caching layer để lưu trữ tạm thời các dữ liệu được truy cập thường xuyên (danh sách NFT, thông tin collection, thống kê người dùng, \ldots), từ đó giảm số lượng truy vấn đến cơ sở dữ liệu và cải thiện đáng kể thời gian phản hồi của API.
+  \item Xây dựng một website NFT marketplace ở mức hoàn chỉnh theo các luồng cơ bản, cho phép người dùng kết nối ví, tạo NFT, niêm yết và thực hiện giao dịch mua/bán NFT.
+  \item Hỗ trợ quản lý bộ sưu tập (collection) và tài sản (NFT) một cách tập trung, giúp người sáng tạo tạo collection, quản lý danh sách NFT thuộc collection và theo dõi trạng thái của từng NFT.
+  \item Cung cấp chức năng tra cứu và theo dõi thông tin NFT/collection phục vụ nhu cầu sử dụng, bao gồm trang chi tiết, thông tin giá, lịch sử giao dịch và một số thống kê tổng quan phục vụ quan sát hoạt động cá nhân.
+  \item Nghiên cứu và thực hành quy trình tích hợp ứng dụng Web2 với Web3, kết hợp giao dịch on-chain và dữ liệu off-chain nhằm đảm bảo hệ thống vừa đáp ứng tính minh bạch của blockchain, vừa đảm bảo khả năng hiển thị và truy vấn nhanh trên giao diện web.
 \end{itemize}
 
-Phạm vi thực hiện của đồ án tập trung vào:
-
+\subsection{Phạm vi thực hiện}
+Đồ án tập trung triển khai phiên bản đầu tiên với các phạm vi sau:
 \begin{itemize}
-  \item Thiết kế và xây dựng \textbf{phiên bản web chạy trên PC và hỗ trợ responsive trên thiết bị di động} cho hệ thống NFT marketplace với kiến trúc ba lớp: frontend (Next.js), backend (NestJS) và smart contract (Solidity).
-  
-  \item Hỗ trợ mạng blockchain \textbf{Binance Smart Chain (BSC) Testnet} làm môi trường triển khai và kiểm thử chính. Hệ thống được định hướng có thể nâng cấp để triển khai lên BSC Mainnet. Smart contract sử dụng chuẩn token ERC-721 cho NFT.
-  
-  \item Xây dựng các chức năng cốt lõi: xác thực người dùng thông qua ví điện tử \textbf{Metamask}, tạo và quản lý NFT/collection, mua/bán NFT thông qua smart contract, hiển thị các chỉ số thống kê và lịch sử giá. Hệ thống đồng bộ dữ liệu on-chain với cơ sở dữ liệu off-chain để phục vụ nhu cầu tìm kiếm, lọc và hiển thị nhanh.
-  
-  \item Lưu trữ metadata và hình ảnh NFT trên \textbf{AWS S3} thông qua cơ chế presigned URL, ưu tiên tính đơn giản, dễ triển khai và hiệu quả trong việc upload, phân phối nội dung.
-  
-  \item Các nội dung nằm ngoài phạm vi của phiên bản đầu tiên bao gồm: hỗ trợ đa chuỗi (multi-chain), tích hợp các cổng thanh toán fiat on-ramp, các cơ chế đấu giá phức tạp, hay các tính năng DeFi nâng cao như staking hoặc lending.
+  \item \textbf{Nền tảng:} xây dựng hệ thống theo mô hình 3 thành phần gồm giao diện web (frontend), dịch vụ xử lý nghiệp vụ (backend) và smart contract.
+  \item \textbf{Môi trường blockchain:} triển khai và kiểm thử trên Binance Smart Chain (BSC) Testnet; định hướng có thể mở rộng để triển khai lên BSC Mainnet khi cần.
+  \item \textbf{Chuẩn NFT và ví:} sử dụng chuẩn ERC-721; hỗ trợ kết nối ví Metamask để người dùng xác thực và thực hiện thao tác liên quan đến giao dịch.
+  \item \textbf{Chức năng cốt lõi:}
+  \begin{itemize}
+    \item Quản lý người dùng theo mô hình đăng nhập bằng ví, quản lý hồ sơ và lịch sử giao dịch cá nhân.
+    \item Tạo và quản lý collection; tạo NFT và gắn vào collection.
+    \item Niêm yết và giao dịch mua/bán NFT thông qua smart contract; hiển thị trạng thái sở hữu và lịch sử giao dịch.
+    \item Tra cứu, lọc và hiển thị danh sách NFT/collection; cung cấp một số thống kê và lịch sử giá phục vụ quan sát hoạt động.
+  \end{itemize}
+  \item \textbf{Lưu trữ dữ liệu:} kết hợp dữ liệu on-chain và dữ liệu off-chain; lưu trữ metadata và hình ảnh NFT trên dịch vụ lưu trữ đám mây để phục vụ truy cập nhanh và ổn định cho ứng dụng web.
+\end{itemize}
+
+\subsection{Các nội dung ngoài phạm vi của phiên bản đầu tiên}
+\begin{itemize}
+  \item Hỗ trợ đa chuỗi (multi-chain).
+  \item Tích hợp các cổng thanh toán fiat on-ramp.
+  \item Các cơ chế đấu giá phức tạp và các loại lệnh giao dịch nâng cao.
+  \item Các tính năng DeFi nâng cao như staking hoặc lending.
 \end{itemize}
 
 \section{Định hướng giải pháp}
 
 Để đạt được các mục tiêu trên, hệ thống được định hướng xây dựng theo các hướng chính sau:
-
 \begin{itemize}
-  \item \textbf{Tách bạch on-chain và off-chain}: 
-  \begin{itemize}
-    \item Phần on-chain (smart contract) chịu trách nhiệm các nghiệp vụ cốt lõi liên quan đến quyền sở hữu NFT, quá trình mint, tạo collection, niêm yết, mua/bán và thu phí nền tảng. Smart contract sử dụng các cơ chế bảo vệ như ReentrancyGuard và dựa trên thư viện OpenZeppelin nhằm hạn chế lỗi bảo mật.
-    \item Phần off-chain (backend server và cơ sở dữ liệu) tập trung quản lý dữ liệu phục vụ giao diện: metadata mở rộng, lịch sử giao dịch chi tiết, thống kê, thông tin người dùng, \ldots Backend lắng nghe các sự kiện (event) phát sinh từ blockchain và cập nhật vào cơ sở dữ liệu, đồng thời vẫn có thể truy vấn trực tiếp blockchain khi cần.
-  \end{itemize}
-  
-  \item \textbf{Thiết kế kiến trúc web hiện đại}: 
-  \begin{itemize}
-    \item \textbf{Frontend}: sử dụng Next.js 14 với App Router để tận dụng các kỹ thuật Server-Side Rendering (SSR) và Static Site Generation (SSG), giúp cải thiện hiệu năng tải trang và hỗ trợ SEO tốt hơn. Giao diện được xây dựng với Tailwind CSS kết hợp Ant Design nhằm đảm bảo tính thống nhất và khả năng responsive. Trạng thái ứng dụng và dữ liệu được quản lý bằng Redux Toolkit và React Query, giúp đồng bộ dữ liệu giữa UI và backend một cách hiệu quả.
-    \item \textbf{Backend}: sử dụng NestJS với mô hình module-based, tách biệt rõ ràng giữa controller, service và repository. Hệ thống API RESTful được mô tả bằng Swagger để thuận tiện trong kiểm thử và tích hợp. Backend phụ trách xử lý nghiệp vụ, xác thực người dùng (JWT), đồng bộ dữ liệu với blockchain, tương tác với PostgreSQL và Redis.
-    \item Kiến trúc được định hướng mở để có thể dễ dàng bổ sung các module thống kê nâng cao, xếp hạng hoặc gợi ý NFT trong tương lai.
-  \end{itemize}
-  
-  \item \textbf{Lưu trữ dữ liệu NFT và metadata hợp lý}: 
-  \begin{itemize}
-    \item Ảnh và các tệp dung lượng lớn liên quan đến NFT được lưu trữ trên \textbf{AWS S3} thông qua cơ chế presigned URL. Frontend trực tiếp upload tệp lên S3, giúp giảm tải cho backend và rút ngắn thời gian xử lý. Đường dẫn tới file trên S3 được lưu trong metadata của NFT và trong cơ sở dữ liệu.
-    \item Cơ sở dữ liệu quan hệ PostgreSQL lưu trữ các thông tin phục vụ tra cứu và thống kê: người dùng, collection, thông tin NFT, lịch sử giá, lịch sử giao dịch, \ldots Bên cạnh đó, \textbf{Redis} được dùng làm caching layer cho các dữ liệu được truy cập nhiều như danh sách NFT phổ biến, thông tin collection hay một số thống kê tổng quan. Redis được cấu hình với thời gian sống (TTL) phù hợp và cơ chế làm mới (refresh) để cân bằng giữa hiệu năng và tính cập nhật của dữ liệu.
-  \end{itemize}
-  
-  \item \textbf{Tập trung vào trải nghiệm người dùng}: 
-  \begin{itemize}
-    \item Quy trình kết nối ví, tạo NFT, niêm yết và mua bán được chia thành các bước rõ ràng, có hướng dẫn trực quan để người mới có thể làm theo dễ dàng. Giao diện responsive giúp người dùng thao tác thuận tiện trên cả máy tính và thiết bị di động.
-    \item Hệ thống cung cấp các trang tổng quan (dashboard) cho người sáng tạo và nhà sưu tầm, hiển thị các chỉ số như tổng tài sản, doanh thu, doanh thu theo mốc thời gian (24 giờ, 7 ngày, 30 ngày), các giao dịch gần nhất và xu hướng mua bán.
-  \end{itemize}
-  
-  \item \textbf{Chi phí sử dụng hợp lý}: trong khuôn khổ đồ án, hệ thống sử dụng \textbf{BSC} -- một mạng blockchain có chi phí giao dịch thấp, tốc độ xử lý nhanh và tương thích với nhiều ví phổ biến. Điều này giúp quá trình thử nghiệm cũng như trải nghiệm của người dùng trở nên dễ tiếp cận hơn.
-  
-  \item \textbf{Đảm bảo tính minh bạch và khả năng truy vết}: lịch sử giao dịch của từng NFT được lưu trữ đầy đủ, bao gồm chủ sở hữu cũ, chủ sở hữu mới, giá giao dịch và mã giao dịch (transaction hash) trên blockchain. Người dùng có thể kiểm tra lại các thông tin này bất cứ lúc nào, góp phần tăng mức độ tin cậy đối với hệ thống.
-  
-  \item \textbf{Tối ưu hóa hiệu năng và khả năng mở rộng}: việc sử dụng Redis để cache các dữ liệu truy cập thường xuyên giúp giảm tải cho cơ sở dữ liệu PostgreSQL và cải thiện tốc độ đáp ứng khi số lượng người dùng cũng như số lượng NFT tăng lên. Cơ chế cập nhật và vô hiệu hóa cache (cache invalidation) được thiết kế để đảm bảo dữ liệu hiển thị luôn bám sát trạng thái thực tế của hệ thống.
+  \item \textbf{Phân tách on-chain và off-chain:}
+  Smart contract chịu trách nhiệm các nghiệp vụ gắn với quyền sở hữu và giao dịch NFT (mint, tạo collection, niêm yết, mua/bán, thu phí). Backend và cơ sở dữ liệu tập trung quản lý dữ liệu phục vụ hiển thị và tra cứu như thông tin người dùng, metadata mở rộng, lịch sử giao dịch chi tiết, thống kê và dữ liệu tổng hợp. Dữ liệu được đồng bộ giữa on-chain và off-chain nhằm đảm bảo tính minh bạch nhưng vẫn đáp ứng hiệu năng khi truy vấn.
+
+  \item \textbf{Kiến trúc hệ thống theo hướng dễ mở rộng và dễ bảo trì:}
+  Hệ thống được tổ chức theo mô hình web hiện đại, tách biệt rõ ràng giữa giao diện (frontend), xử lý nghiệp vụ (backend) và lớp hợp đồng thông minh (smart contract). Các thành phần được thiết kế theo module/chức năng để thuận tiện phát triển, kiểm thử và mở rộng thêm các tính năng trong tương lai.
+
+  \item \textbf{Tổ chức lưu trữ dữ liệu phù hợp với đặc thù NFT:}
+  Dữ liệu dung lượng lớn (hình ảnh, tệp đính kèm) được lưu trữ trên dịch vụ lưu trữ bên ngoài, còn cơ sở dữ liệu lưu các thông tin phục vụ tra cứu và thống kê như NFT, collection, lịch sử giá và lịch sử giao dịch. Bên cạnh đó, hệ thống sử dụng cơ chế lưu đệm (caching) cho các dữ liệu truy cập thường xuyên nhằm cải thiện tốc độ phản hồi.
+
+  \item \textbf{Tối ưu trải nghiệm người dùng:}
+  Quy trình thao tác được thiết kế theo các bước rõ ràng, dễ theo dõi cho các chức năng chính như kết nối ví, tạo NFT, niêm yết và mua/bán. Hệ thống cung cấp các trang tổng quan giúp người dùng quan sát tài sản và hoạt động giao dịch của mình một cách trực quan.
+
+  \item \textbf{Đảm bảo tính minh bạch và khả năng truy vết:}
+  Các thông tin giao dịch quan trọng được liên kết với dữ liệu trên blockchain, cho phép người dùng kiểm tra lịch sử chuyển nhượng và thông tin giao dịch của từng NFT, từ đó tăng mức độ tin cậy đối với hệ thống.
+
+  \item \textbf{Định hướng hiệu năng và khả năng mở rộng:}
+  Hệ thống ưu tiên các giải pháp giúp truy vấn nhanh, giảm tải cho cơ sở dữ liệu và đảm bảo khả năng đáp ứng khi số lượng người dùng, NFT và giao dịch tăng lên trong tương lai.
 \end{itemize}
+
 
 \section{Bố cục đồ án}
 
 Các nội dung còn lại của báo cáo đồ án tốt nghiệp được sắp xếp như sau:
-
 \begin{itemize}
-  \item \textbf{Chương 2 -- Khảo sát và phân tích yêu cầu}: trình bày tổng quan thị trường NFT trong và ngoài nước, phân tích một số nền tảng NFT marketplace tiêu biểu (như OpenSea, Rarible) và các đồ án liên quan. Từ đó, chương này tổng hợp các yêu cầu chức năng, phi chức năng cho hệ thống đề xuất và mô tả chúng thông qua biểu đồ use case, kịch bản sử dụng, biểu đồ hoạt động, đồng thời nêu các yêu cầu về hiệu năng, bảo mật và khả năng mở rộng.
-  
-  \item \textbf{Chương 3 -- Công nghệ sử dụng}: giới thiệu các công nghệ, nền tảng và thư viện được áp dụng trong dự án như blockchain BSC, smart contract với Solidity và Hardhat, các công cụ phát triển frontend (Next.js, React, Tailwind CSS, Ant Design) và backend (NestJS, TypeORM, PostgreSQL), dịch vụ lưu trữ (AWS S3), hệ thống caching (Redis), cùng các thư viện hỗ trợ (ethers.js, wagmi, Redux Toolkit, React Query). Chương này cũng nêu lý do lựa chọn các công nghệ trên so với những phương án thay thế.
-  
-  \item \textbf{Chương 4 -- Thiết kế, triển khai và đánh giá hệ thống}: mô tả kiến trúc tổng thể của hệ thống NFT marketplace (ba lớp: frontend, backend, smart contract), thiết kế cơ sở dữ liệu (schema và quan hệ giữa các bảng), thiết kế smart contract (NFTMarketplace, NFTCollection), thiết kế API backend (các endpoint chính, cơ chế authentication/authorization) và giao diện người dùng (các màn hình, component và luồng tương tác). Chương này cũng trình bày quá trình hiện thực từng module, kèm theo hình ảnh minh họa và kết quả kiểm thử.
-  
-  \item \textbf{Chương 5 -- Các giải pháp và đóng góp nổi bật}: tổng hợp các điểm nhấn của hệ thống so với những nền tảng tham khảo, chẳng hạn kiến trúc tách bạch on-chain/off-chain, quy trình upload thông qua presigned URL, cơ chế Redis caching để tối ưu hiệu năng, dashboard thống kê chi tiết và hệ thống lịch sử giao dịch rõ ràng, minh bạch. Với mỗi giải pháp, chương này nêu bài toán đặt ra, cách tiếp cận, công nghệ sử dụng và kết quả đạt được.
-  
-  \item \textbf{Chương 6 -- Kết luận và hướng phát triển}: tóm tắt các kết quả chính của đồ án, đánh giá mức độ hoàn thành so với mục tiêu ban đầu, chỉ ra những hạn chế hiện tại (như chưa hỗ trợ đa chuỗi, chưa triển khai cơ chế đấu giá) và đề xuất các hướng mở rộng trong tương lai (đa chuỗi, bổ sung các loại tài sản số khác, tối ưu hiệu năng cho quy mô người dùng lớn, \ldots).
+  \item \textbf{Chương 2 -- Khảo sát và phân tích yêu cầu}: trình bày bối cảnh và khảo sát các hệ thống liên quan, từ đó phân tích nhu cầu và xác định các yêu cầu chức năng, phi chức năng của hệ thống. Chương này đồng thời mô hình hóa yêu cầu bằng các biểu đồ và mô tả kịch bản sử dụng làm cơ sở cho các chương thiết kế và triển khai.
+
+  \item \textbf{Chương 3 -- Cở sở lý thuyết và Công nghệ sử dụng}: giới thiệu cơ sở lý thuyết và các công nghệ, nền tảng được lựa chọn để xây dựng hệ thống, kèm theo lý do lựa chọn nhằm đảm bảo phù hợp với phạm vi, mục tiêu và đặc thù của bài toán NFT marketplace.
+
+  \item \textbf{Chương 4 -- Thiết kế và triển khai hệ thống}: trình bày kiến trúc tổng thể, thiết kế cơ sở dữ liệu, thiết kế các thành phần chính và quá trình hiện thực các chức năng cốt lõi của hệ thống. Chương này cũng đưa ra kết quả kiểm thử và đánh giá mức độ đáp ứng yêu cầu đã đề ra.
+
+  \item \textbf{Chương 5 -- Các giải pháp và đóng góp nổi bật}: tổng hợp các điểm nổi bật trong quá trình xây dựng hệ thống, bao gồm các quyết định thiết kế quan trọng, cách tiếp cận giải quyết một số vấn đề tiêu biểu và kết quả đạt được.
+
+  \item \textbf{Chương 6 -- Kết luận và hướng phát triển}: tóm tắt kết quả thực hiện, đánh giá mức độ hoàn thành so với mục tiêu ban đầu, nêu hạn chế của hệ thống và đề xuất hướng phát triển trong tương lai.
 \end{itemize}
+
 
 Tóm lại, chương này giới thiệu bối cảnh, lý do lựa chọn đề tài, mục tiêu, phạm vi và định hướng giải pháp cho hệ thống website NFT marketplace. Các chương tiếp theo sẽ lần lượt đi sâu vào phần khảo sát, thiết kế, triển khai và đánh giá chi tiết hệ thống.
 
